@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- JDBC connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://127.0.0.1:3307/podpiski</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password"></property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Echo SQL queries (выключено для чистого вывода) -->
+        <property name="show_sql">false</property>
+        <property name="format_sql">false</property>
+
+        <!-- Connection pool (убрал c3p0, чтобы не было предупреждений) -->
+
+        <!-- Disable automatic schema export (Flyway will manage schemas) -->
+        <property name="hbm2ddl.auto">validate</property>
+
+        <mapping class="com.example.project.model.User"/>
+        <mapping class="com.example.project.model.Subscription"/>
+    </session-factory>
+</hibernate-configuration>
