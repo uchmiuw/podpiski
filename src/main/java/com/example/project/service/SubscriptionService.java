@@ -7,15 +7,26 @@ import java.util.List;
 
 public class SubscriptionService {
 
-    private SubscriptionRepository repository =
-            new SubscriptionRepository();
+    private SubscriptionRepository repository = new SubscriptionRepository();
 
     public void addSubscription(Subscription subscription) {
         repository.save(subscription);
     }
 
+    public void updateSubscription(Subscription subscription) {
+        repository.update(subscription);
+    }
+
+    public void deleteSubscription(Subscription subscription) {
+        repository.delete(subscription);
+    }
+
     public List<Subscription> getAllSubscriptions() {
         return repository.findAll();
+    }
+
+    public Subscription getSubscriptionById(Integer id) {
+        return repository.findById(id);
     }
 
     public void printAllSubscriptions() {
@@ -29,7 +40,8 @@ public class SubscriptionService {
         System.out.println("\nСПИСОК ПОДПИСОК");
 
         for (Subscription s : subscriptions) {
-            System.out.println("Название: " + s.getName() + ", Цена: " + s.getPrice() + ", Длительность: " + s.getDurationDays() + " дней" + ", Пользователь: " + s.getUser().getName());
+            System.out.println("Название: " + s.getName() + ", Цена: " + s.getPrice() +
+                    ", Длительность: " + s.getDurationDays() + " дней" );
         }
     }
 }

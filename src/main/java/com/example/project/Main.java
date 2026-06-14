@@ -30,9 +30,9 @@ public class Main {
             userService.addUser(user2);
             userService.addUser(user3);
 
-            Subscription sub1 = new Subscription("Мини", 299.00, 30, "Базовый тариф", user1);
-            Subscription sub2 = new Subscription("Стандарт", 399.00, 30, "Стандартный тариф",user2);
-            Subscription sub3 = new Subscription("Премиум", 699.00, 30, "Премиум тариф",user3);
+            Subscription sub1 = new Subscription("Мини", 299.00, 30, "Базовый тариф");
+            Subscription sub2 = new Subscription("Стандарт", 399.00, 30, "Стандартный тариф");
+            Subscription sub3 = new Subscription("Премиум", 699.00, 30, "Премиум тариф");
 
             subscriptionService.addSubscription(sub1);
             subscriptionService.addSubscription(sub2);

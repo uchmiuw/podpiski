@@ -1,61 +1,61 @@
 package com.example.project.repository;
 
-import com.example.project.model.Subscription;
+import com.example.project.model.UserSubscription;
 import com.example.project.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class SubscriptionRepository {
+public class UserSubscriptionRepository {
 
-    public void save(Subscription subscription) {
+    public void save(UserSubscription us) {
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            session.persist(subscription);
+            session.persist(us);
             tx.commit();
         } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
+            if (tx != null) tx.rollback();
             e.printStackTrace();
         }
     }
 
-    public void update(Subscription subscription) {
+    public void update(UserSubscription us) {
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            session.merge(subscription);
+            session.merge(us);
             tx.commit();
         } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
+            if (tx != null) tx.rollback();
             e.printStackTrace();
         }
     }
 
-    public Subscription findById(Integer id) {
+    public List<UserSubscription> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(Subscription.class, id);
+            return session.createQuery(
+                    "from UserSubscription us join fetch us.user join fetch us.subscription",
+                    UserSubscription.class
+            ).list();
         }
     }
 
-    public List<Subscription> findAll() {
+    public UserSubscription findById(Integer id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Subscription", Subscription.class).list();
+            return session.get(UserSubscription.class, id);
         }
     }
 
-    public void delete(Subscription subscription) {
+    public void delete(UserSubscription us) {
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            session.remove(session.merge(subscription));
+            session.remove(session.merge(us));
             tx.commit();
         } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
+            if (tx != null) tx.rollback();
             e.printStackTrace();
         }
     }
